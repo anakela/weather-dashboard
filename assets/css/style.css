@@ -1,7 +1,36 @@
 root {
-    
+
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    color: #fff;
+    background-image: linear-gradient(to right, rgba(52, 97, 185, 1), rgba(33, 11, 77, 1));
+    margin-bottom: 10px;
+}
+
+aside h2 {
+    text-align: center;
+}
+
+input {
+    border-radius: 5px;
+    margin: 5px;
+}
+
+button {
+    color: #fff;
+    /* background-color: #5098e6; */
+    border-radius: 5px;
+    margin: 5px;
+}
+
+hr {
+    background-color: #000;
 }

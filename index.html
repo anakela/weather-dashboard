@@ -8,13 +8,60 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Weather Dashboard</title>
 </head>
-<body>
-    <header>
-
+<body class="container-fluid">
+    <!-- Weather dashboard header -->
+    <header class="row justify-content-center">
+        <h1 class="col-sm-12" id="weather-dash-title">Weather Dashboard</h1>
     </header>
-    <main>
+    
+    <!--  -->
+    <section class="row justify-content-center">
+        <!-- Aside for searching and storing data -->
+        <aside class="col-sm-4 justify-content-center">
+            <h2>Search for a City:</h2>
+            <div class="row" id="enter-city">
+                <input type="text" placeholder="Enter city name" class="col-sm-11" id="city-input" />
+            </div>
+            <div class="row" id="search">
+                <button type="submit" class="col-sm-11 bg-primary" id="search-btn">Search</button>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-12" id="cities">
+                    <h2>Cities</h2>
+                </div>
+            </div>
+        </aside>
+    
+        <!-- Main area for displaying current weather and future forecasts -->
+        <main class="row col-sm-8">
+            <div class="col-sm-12" id="todays-weather">
+                <h2>Today's Weather</h2>
+            </div>
+            <div class="col-sm-12" id="5-day">
+                <h2>5-Day Forecast</h2>
+            </div>
+        </main>
+    </section>
 
-    </main>
+    <!-- Modal for incorrect or blank info. -->
+    <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Blank City Input</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>The city input field cannot be left blank. Please try again.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="ok-btn" data-bs-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <footer>
 
     </footer>
