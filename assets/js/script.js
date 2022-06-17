@@ -15,8 +15,13 @@ function getLatLong(lat, long) {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            // let cityDisplayName = $("<h3>").text(`${data.name}`);
-            // $("#todays-weather").append(cityDisplayName);
+            // Set a variable for the UVI.
+            let uvi = $("<p>").text(`UV Index: ${data.daily[0].uvi}`);
+
+            // Append the UVI to the todays-weather div.
+            $("#todays-weather").append(uvi);
+            // Run the fiveDayForecast()function.
+            fiveDayForecast(data);
         })
 }
 
@@ -33,13 +38,12 @@ $("#search-btn").on("click", function () {
         });
     } else {
         // Run the storeCities() function.
-        storeCities(userInput);       
+        storeCities(userInput);
         // Run the getWeather() function.
         getWeather(userInput);
     }
     // Clear input field.
     $("#city-input").val("");
-    console.log(userInput);
 });
 
 // Get today's current weather for the city searched.
@@ -53,6 +57,22 @@ function getWeather(city) {
         .then(data => {
             getLatLong(data.coord.lat, data.coord.lon);
             console.log(data)
+
+            // Create variables for getWeather API pull.
+            let cityDisName = $("#city-dis-name").text(`${data.name} (${moment().format('l')})`);
+            let weatherCond = $("<img>").attr("src", `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
+            let temp = $("<p>").text(`Temp: ${data.main.temp} \xB0F`);
+            let humid = $("<p>").text(`Humidity: ${data.main.humidity}%`);
+            let windSpeed = $("<p>").text(`Wind Speed: ${data.wind.speed} MPH`);
+
+            // Display today's weather in the todays-weather div.
+            $("#todays-weather").append(
+                cityDisName,
+                weatherCond,
+                temp,
+                humid,
+                windSpeed,
+            );
         });
 }
 
@@ -86,6 +106,7 @@ function displayCities() {
         return;
     }
 
+    console.log(cityBank);
     // Target the cities div with cityList.
     let cityList = $("#cities");
 
@@ -109,26 +130,54 @@ function displayCities() {
             getWeather(cityBtn.text());
         });
     }
+}
 
-    // Create variables for the items to append to the todays-weather div.
-    let cityDisName = $("<h3>").text(`${data.name}`);
-    let todaysDate = $("<p>").text(new Date(data.coord.dt).format("MM/DD/YYYY"));
-    let weatherCond = `http://openweathermap.org/img/wn/${data.daily.weather[0].icon}@2x.png`;
-    let temp = $("<p>").text(`Temperature: ${data.main.temp} \xB0F`);
-    let humid = $("<p>").text(`Humidity: ${data.main.humidity}%`);
-    let windSpeed = $("<p>").text(`Wind Speed: ${data.wind.speed} MPH`);
-    let uvi = $("<p>").text(`UV Index: ${data.daily[0].uvi}`);
+function fiveDayForecast(data) {
+    // Display the div's title.
+    $("#five-day-header").text(`5-Day Forecast`);
 
-    // Display today's weather in the todays-weather div.
-    $("#todays-weather").append(
-        cityDisName,
-        todaysDate,
-        weatherCond,
-        temp,
-        humid,
-        windSpeed,
-        uvi
-    );
+    for (let i = 0; i < 5; i++) {
+        // // Declare variables for function use.
+        // let event = new Date();
+        // // Show date
+        // let date = $("#five-day").append(`${data.daily[i].dt}`);
+        // console.log(date);
+
+        let date = $("<h3>").attr(`new Date(${data.daily[i].dt}`);
+        console.log(date);
+        // console.log(test.getLocaleDateString(date));
+        // let formatDate = $("#five-day").append(`${date.getDate()}`);
+        // let formatDate = date.toLocaleDateString('en-US');
+
+        // console.log(formatDate);
+
+        // Show weather icon
+        let weatherIcon = $("<img>").attr("src", `http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png`);
+        // Show temp
+        let temp = $("<p>").text(`Temp: ${data.daily[i].temp.day} \xB0F`);
+        // Show wind speed
+        let speed = $("<p>").text(`Wind Speed: ${data.daily[i].wind_speed}  MPH`);
+        // Show humidity
+        let humidity = $("<p>").text(`Humidity: ${data.daily[i].humidity}`);
+
+        // Create a div for each day.
+        let dayDiv = $("<div>")
+            .addClass("col-sm-2")
+            .attr("id", "day-div" + i);
+
+        $(dayDiv).append(
+            date,
+            weatherIcon,
+            temp,
+            speed,
+            humidity
+        );
+
+        // Display five-day forcast in the five-day div.
+        $("#forecast-divs").append(dayDiv);
+
+        console.log(dayDiv);
+    }
 }
 
 // Display today's weather in the todays-weather div.

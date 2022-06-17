@@ -1,4 +1,4 @@
-root {
+:root {
 
 }
 
@@ -14,6 +14,14 @@ header {
     background-image: linear-gradient(to right, rgba(52, 97, 185, 1), rgba(33, 11, 77, 1));
     margin-bottom: 10px;
 }
+
+/* main {
+    display: none;
+} */
+
+/* main #todays-weather, main #five-day {
+    display: none;
+} */
 
 aside h2 {
     text-align: center;
@@ -31,6 +39,34 @@ button {
     margin: 5px;
 }
 
+#cities button {
+    background-color: gray;
+    border: none;
+}
+
 hr {
     background-color: #000;
+}
+
+/* #five-day {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+} */
+
+#forecast-divs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#forecast-divs div {
+    /* display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; */
+    background-color: #200b4e;
+    color: #fff;
+    margin: 5px;
+    padding: 10px;
+    width: 20vw;
 }
