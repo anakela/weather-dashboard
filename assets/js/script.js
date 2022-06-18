@@ -16,10 +16,19 @@ function getLatLong(lat, long) {
         .then(data => {
             console.log(data);
             // Set a variable for the UVI.
-            let uvi = $("<p>").text(`UV Index: ${data.daily[0].uvi}`);
+            let uvi;
 
-            // Append the UVI to the todays-weather div.
-            $("#todays-weather").append(uvi);
+            if (data.daily[0].uvi <= 2) {
+                uvi = $("<p id='daily-uvi'>").text(`UV Index: ${data.daily[0].uvi}`).css("background-color", "green");
+            } else if (data.daily[0].uvi > 2 && data.daily[0].uvi <= 5) {
+                uvi = $("<p id='daily-uvi'>").text(`UV Index: ${data.daily[0].uvi}`).css("background-color", "yellow");
+            } else {
+                uvi = $("<p id='daily-uvi'>").text(`UV Index: ${data.daily[0].uvi}`).css("background-color", "red");
+            }
+
+
+            // Append the UVI to the weather-deets div.
+            $("#weather-deets").append(uvi);
             // Run the fiveDayForecast()function.
             fiveDayForecast(data);
         })
@@ -59,15 +68,21 @@ function getWeather(city) {
             console.log(data)
 
             // Create variables for getWeather API pull.
-            let cityDisName = $("#city-dis-name").text(`${data.name} (${moment().format('l')})`);
+            $("#city-dis-name").text(`${data.name} (${moment().format('l')})`);
             let weatherCond = $("<img>").attr("src", `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
             let temp = $("<p>").text(`Temp: ${data.main.temp} \xB0F`);
             let humid = $("<p>").text(`Humidity: ${data.main.humidity}%`);
             let windSpeed = $("<p>").text(`Wind Speed: ${data.wind.speed} MPH`);
 
+            // Empty the todays-weather div before appending new data.
+            $("#weather-deets").html('');
+
+            // Empty forecast-divs.
+            $("#forecast-divs").html('');
+
             // Display today's weather in the todays-weather div.
-            $("#todays-weather").append(
-                cityDisName,
+            $("#weather-deets").append(
+                // cityDisName,
                 weatherCond,
                 temp,
                 humid,
@@ -136,20 +151,10 @@ function fiveDayForecast(data) {
     // Display the div's title.
     $("#five-day-header").text(`5-Day Forecast`);
 
-    for (let i = 0; i < 5; i++) {
-        // // Declare variables for function use.
-        // let event = new Date();
-        // // Show date
-        // let date = $("#five-day").append(`${data.daily[i].dt}`);
-        // console.log(date);
-
-        let date = $("<h3>").attr(`new Date(${data.daily[i].dt}`);
+    for (let i = 1; i < 6; i++) {
+        // Format the data based on the date pulled from the API.
+        let date = $("<p>").text(`${new Date(data.daily[i].dt * 1000).toLocaleDateString()}`);
         console.log(date);
-        // console.log(test.getLocaleDateString(date));
-        // let formatDate = $("#five-day").append(`${date.getDate()}`);
-        // let formatDate = date.toLocaleDateString('en-US');
-
-        // console.log(formatDate);
 
         // Show weather icon
         let weatherIcon = $("<img>").attr("src", `http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png`);
@@ -165,6 +170,7 @@ function fiveDayForecast(data) {
             .addClass("col-sm-2")
             .attr("id", "day-div" + i);
 
+        // Append attributes to the dayDiv div.
         $(dayDiv).append(
             date,
             weatherIcon,
@@ -179,42 +185,6 @@ function fiveDayForecast(data) {
         console.log(dayDiv);
     }
 }
-
-// Display today's weather in the todays-weather div.
-// $("#todays-weather").get(function(data) {
-//     $("#todays-weather")
-//         .append("City: " + data.name)
-//         .append("Date: " + data.coord.dt)
-//         .append("Weather Conditions: " + data.weather[0].icon)
-//         .append("Temperature: " + data.main.temp)
-//         .append("Humidity: " data.main.humidity)
-//         .append("Wind Speed: " + data.wind.speed)
-//         .append("UV Index: " + data.daily[0].uvi);
-// });
-
-// $("#todays-weather")
-//     .append("City: " + data.name)
-//     .append("Date: " + data.coord.dt)
-//     .append("Weather Conditions: " + data.weather[0].icon)
-//     .append("Temperature: " + data.main.temp)
-//     .append("Humidity: " + data.main.humidity)
-//     .append("Wind Speed: " + data.wind.speed)
-//     .append("UV Index: " + data.daily[0].uvi);
-
-    // WHEN I view the UV index
-    // THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-    // WHEN I view future weather conditions for that city
-    // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-
-// Display the next five days of forecasts in the 5-day forecast div.
-
-
-// Loop through future forecasts and end them at five.
-// // for loop (stop at 5)
-// for (let i = 0; i < 5; i++) {
-//     const element = array[i];
-    
-// }
 
 // Run displayCities() on page load.
 displayCities();
