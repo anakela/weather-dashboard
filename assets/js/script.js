@@ -58,7 +58,7 @@ $("#search-btn").on("click", function () {
 // Get today's current weather for the city searched.
 function getWeather(city) {
     // URL for city search queries.
-    let queryUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
+    let queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
 
     // Fetch data from OpenWeather.
     fetch(queryUrl)
@@ -69,7 +69,7 @@ function getWeather(city) {
 
             // Create variables for getWeather API pull.
             $("#city-dis-name").text(`${data.name} (${moment().format('l')})`);
-            let weatherCond = $("<img>").attr("src", `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
+            let weatherCond = $("<img>").attr("src", `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
             let temp = $("<p>").text(`Temp: ${data.main.temp} \xB0F`);
             let humid = $("<p>").text(`Humidity: ${data.main.humidity}%`);
             let windSpeed = $("<p>").text(`Wind Speed: ${data.wind.speed} MPH`);
@@ -157,7 +157,7 @@ function fiveDayForecast(data) {
         console.log(date);
 
         // Show weather icon
-        let weatherIcon = $("<img>").attr("src", `http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png`);
+        let weatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png`);
         // Show temp
         let temp = $("<p>").text(`Temp: ${data.daily[i].temp.day} \xB0F`);
         // Show wind speed
