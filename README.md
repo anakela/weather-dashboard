@@ -54,8 +54,8 @@ THEN I am again presented with current and future conditions for that city
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Weather Dashboard Repository](https://github.com/anakela/weather-dashboard)
+- Live Site URL: [Live Weather Dashboard Site](https://anakela.github.io/weather-dashboard/)
 
 ## My Process
 
@@ -63,37 +63,106 @@ THEN I am again presented with current and future conditions for that city
 
 - Semantic HTML5 markup
 - CSS
-- Bootstrap
+- [Bootstrap](https://getbootstrap.com/docs/3.3/)
 - JavaScript
-- jQuery
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- [jQuery](https://jquery.com/)
 
 ### What I Learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+This challenge was tough!  There were so many moving parts to get working together.  
 
-To see how you can add code snippets, see below:
+One of the things I enjoyed about this challenge was getting a chance to create HTML elements dynamically using JavaScript/jQuery, and including data pulled from an API while doing so.  An example of this can be found in the snippet of code below, which I used to pull UVI information and display it on `index.html`.
 
-```html
-<h1>Some HTML code I'm proud of</h1>
+```JavaScript
+ // Fetch data from OpenWeather.
+    fetch(oneCall)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // Set a variable for the UVI.
+            let uvi;
+
+            if (data.daily[0].uvi <= 2) {
+                uvi = $("<p id='daily-uvi'>").text(`UV Index: ${data.daily[0].uvi}`).css("background-color", "green");
+            } else if (data.daily[0].uvi > 2 && data.daily[0].uvi <= 5) {
+                uvi = $("<p id='daily-uvi'>").text(`UV Index: ${data.daily[0].uvi}`).css("background-color", "yellow");
+            } else {
+                uvi = $("<p id='daily-uvi'>").text(`UV Index: ${data.daily[0].uvi}`).css("background-color", "red");
+            }
+
+
+            // Append the UVI to the weather-deets div.
+            $("#weather-deets").append(uvi);
+            // Run the fiveDayForecast()function.
+            fiveDayForecast(data);
+        })
 ```
 
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
+This occured once more in my `getWeather()` function, as can be seen below.
+
+```JavaScript
+// Fetch data from OpenWeather.
+    fetch(queryUrl)
+        .then(response => response.json())
+        .then(data => {
+            getLatLong(data.coord.lat, data.coord.lon);
+            console.log(data)
+
+            // Create variables for getWeather API pull.
+            $("#city-dis-name").text(`${data.name} (${moment().format('l')})`);
+            let weatherCond = $("<img>").attr("src", `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
+            let temp = $("<p>").text(`Temp: ${data.main.temp} \xB0F`);
+            let humid = $("<p>").text(`Humidity: ${data.main.humidity}%`);
+            let windSpeed = $("<p>").text(`Wind Speed: ${data.wind.speed} MPH`);
+
+            // Empty the todays-weather div before appending new data.
+            $("#weather-deets").html('');
+
+            // Empty forecast-divs.
+            $("#forecast-divs").html('');
+
+            // Display today's weather in the todays-weather div.
+            $("#weather-deets").append(
+                // cityDisName,
+                weatherCond,
+                temp,
+                humid,
+                windSpeed,
+            );
+        });
 ```
 
-If you want more help with writing markdown, check out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+In addition to pulling API data and displaying it dynamically, I also had the opportunity to use additional Bootstrap elements such as a modal.  I enjoyed learning how to activate the modal when a user tries to search for no city.
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+```JavaScript
+// Initially hide the modal.
+let tryAgain = $(".modal");
+tryAgain.hide();
+
+// User input values.
+    let userInput = $("#city-input").val().trim();
+    if (userInput === '') {
+        // Show try again modal.
+        tryAgain.show();
+        // Hide try again modal when OK button is clicked.
+        $("#ok-btn").on("click", function () {
+            tryAgain.hide();
+        });
+    } else {
+        // Run the storeCities() function.
+        storeCities(userInput);
+        // Run the getWeather() function.
+        getWeather(userInput);
+    }
+```
+
+Lastly, the ability to practice how to use `localStorage` was much appreciated, despite its difficulty.  I was happy to be able to give this another try and pull from `localStorage` for previously searched cities.
 
 ### Continued Development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+I would love to continue to develop the weather dashboard to include a few additional features.  These include:
+- The ability for users to search for cities by hitting the "Enter" button on their keyboards.
+- Updating the list of buttons more thoroughly (e.g., pushing the latest searches to the top of the list of buttons that are created.)
 
 ### Useful Resources
 
