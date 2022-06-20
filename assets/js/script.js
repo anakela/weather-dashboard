@@ -59,9 +59,6 @@ $("#search-btn").on("click", function () {
     $("#five-day").show();
 });
 
-// On clicking the search button, pull the city input value and run the getWeather() function.
-const input = document.getElementById("city-input");
-
 // Get today's current weather for the city searched.
 function getWeather(city) {
     // URL for city search queries.
