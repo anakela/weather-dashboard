@@ -53,7 +53,14 @@ $("#search-btn").on("click", function () {
     }
     // Clear input field.
     $("#city-input").val("");
+    // Show main div.
+    $("main").show();
+    $("#todays-weather").show();
+    $("#five-day").show();
 });
+
+// On clicking the search button, pull the city input value and run the getWeather() function.
+const input = document.getElementById("city-input");
 
 // Get today's current weather for the city searched.
 function getWeather(city) {
@@ -129,7 +136,7 @@ function displayCities() {
     $("#cities").empty();
 
     // Display buttons for the last eight cities searched.
-    for (let i = 0; i < cityBank.length && i < 8; i++) {
+    for (let i = 0; i < cityBank.length && i < 10; i++) {
         // Create a new button when a city is searched.
         let cityBtn = $("<button>")
             .addClass("btn btn-primary col-11")
@@ -143,6 +150,10 @@ function displayCities() {
         cityBtn.on("click", function () {
             // getLatLong(cityBtn.text());
             getWeather(cityBtn.text());
+            // Show main div.
+            $("main").show();
+            $("#todays-weather").show();
+            $("#five-day").show();
         });
     }
 }

@@ -50,15 +50,7 @@ THEN I am again presented with current and future conditions for that city
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![](./assets/images/weather-dashboard-screenshot.png)
 
 ### Links
 
@@ -71,6 +63,9 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 - Semantic HTML5 markup
 - CSS
+- Bootstrap
+- JavaScript
+- jQuery
 
 **Note: These are just examples. Delete this note and replace the list above with your own choices**
 
@@ -102,18 +97,37 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 ### Useful Resources
 
+- [Convert Milliseconds to a Date using JavaScript](https://bobbyhadz.com/blog/javascript-convert-milliseconds-to-date)
+- [EPA's UV Index Scale](https://www.epa.gov/sunsafety/uv-index-scale-0)
 - [How to Change the Color of an `<hr>` Element using CSS](https://www.tutorialrepublic.com/faq/how-to-change-the-color-of-an-hr-element-using-css.php)
+- [HTML Symbols: Celsius Degrees Symbol](https://www.htmlsymbols.xyz/unicode/U+2103)
+- [jQuery: .css()](https://api.jquery.com/css/)
+- [jQuery: .show()](https://api.jquery.com/show/)
+- [MDN: Date.prototype.toLocaleDateString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
+- [Moment.js](https://momentjs.com/)
+- [OpenWeather: One Call API 1.0](https://openweathermap.org/api/one-call-api)
+- [OpenWeather: Current Weather Data](https://openweathermap.org/current)
+- [Stack Overflow: toLocalDateString() is not returning dd/mm/yyyy format](https://stackoverflow.com/questions/22719346/tolocaledatestring-is-not-returning-dd-mm-yyyy-format)
+- [Stack Overflow: Converting milliseconds to a date (jQuery/JavaScript)](https://stackoverflow.com/questions/4673527/converting-milliseconds-to-a-date-jquery-javascript)
+- [Stack Overflow: Convert a Unix timestamp to time in JavaScript](https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript)
+- [Stack Overflow: What format is this date value in?](https://stackoverflow.com/questions/23576805/what-format-is-this-date-value-in)
 - [W3Schools: CSS Gradients](https://www.w3schools.com/css/css3_gradients.asp)
+- [W3Schools: HTML Favicon](https://www.w3schools.com/html/html_favicon.asp)
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+- LinkedIn - [Angela Soto](https://www.linkedin.com/in/anakela/)
+- GitHub - [@anakela](https://github.com/anakela)
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+- Fellow Bootcampers:
+  - Nolan Spence
+  - Nifer Kilakila
+  - Ivy Chang
+  - Asha Chakre
+- TAs:
+  - Scott Nelson
+  - Matthew Kaus
+  - Luigi Campbell
+- Bobbi Tarkany (Tutor)

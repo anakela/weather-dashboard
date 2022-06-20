@@ -1,7 +1,3 @@
-:root {
-
-}
-
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -19,9 +15,9 @@ header {
     display: none;
 } */
 
-/* main #todays-weather, main #five-day {
+main #todays-weather, main #five-day {
     display: none;
-} */
+}
 
 aside h2 {
     text-align: center;
@@ -34,7 +30,6 @@ input {
 
 button {
     color: #fff;
-    /* background-color: #5098e6; */
     border-radius: 5px;
     margin: 5px;
 }
@@ -54,6 +49,12 @@ hr {
     flex-wrap: wrap;
 } */
 
+#todays-weather {
+    border: #000 1px solid;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
 #forecast-divs {
     display: flex;
     flex-direction: row;
@@ -61,14 +62,11 @@ hr {
 }
 
 #forecast-divs div {
-    /* display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; */
-    background-color: #200b4e;
+    background-color: #27266f;
     color: #fff;
     margin: 5px;
     padding: 10px;
-    width: 20vw;
+    /* width: 20vw; */
     border-radius: 5px;
 }
 
