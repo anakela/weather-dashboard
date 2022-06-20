@@ -158,6 +158,68 @@ tryAgain.hide();
 
 Lastly, the ability to practice how to use `localStorage` was much appreciated, despite its difficulty.  I was happy to be able to give this another try and pull from `localStorage` for previously searched cities.
 
+```JavaScript
+// Store the city input for users in localStorage.
+function storeCities(cityName) {
+    let cityBank = JSON.parse(localStorage.getItem("cityBank"));
+
+    if (cityBank === null) {
+        cityBank = [cityName];
+    } else {
+        for (let i = 0; i < cityBank.length; i++) {
+            if (cityName === cityBank[i]) {
+                return;
+            }
+            
+        }
+        // Add the most recent search to the top.
+        cityBank.splice(0, 0, cityName);
+    }
+
+    localStorage.setItem("cityBank", JSON.stringify(cityBank));
+    // Call function to display cities as buttons.
+    displayCities();
+};
+
+// Display the cities that are in localStorage.
+function displayCities() {
+    let cityBank = JSON.parse(localStorage.getItem("cityBank"));
+    // If the cityBank entry is null, don't add it to localStorage.
+    if (cityBank === null) {
+        return;
+    }
+
+    console.log(cityBank);
+    // Target the cities div with cityList.
+    let cityList = $("#cities");
+
+    // Empty the excess cities if they surpass eight searches.
+    $("#cities").empty();
+
+    // Display buttons for the last eight cities searched.
+    for (let i = 0; i < cityBank.length && i < 10; i++) {
+        // Create a new button when a city is searched.
+        let cityBtn = $("<button>")
+            .addClass("btn btn-primary col-11")
+            .attr("id", "city-search" + i)
+            .text(cityBank[i]);
+
+        // Append the next city as a button.
+        $("#cities").append(cityBtn);
+
+        // When the dynamically created city buttons are clicked, display their search information.
+        cityBtn.on("click", function () {
+            // getLatLong(cityBtn.text());
+            getWeather(cityBtn.text());
+            // Show main div.
+            $("main").show();
+            $("#todays-weather").show();
+            $("#five-day").show();
+        });
+    }
+}
+```
+
 ### Continued Development
 
 I would love to continue to develop the weather dashboard to include a few additional features.  These include:
